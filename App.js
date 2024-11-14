@@ -15,11 +15,12 @@ export default function App() {
   const moins = () => {
     setNb(nb - 1)
   }
-  const [number, onChangeNb] = React.useState('');
+  const [number, onChangeNb] = useState();
+  
 
   let max = 100;
   let min = 1;
-  let rand = Math.floor(Math.random() * (max - min));
+  let rand = Math.floor(Math.random() * number);
 
   return (
     <View style={styles.container}>
@@ -32,7 +33,7 @@ export default function App() {
       <Text>valeur de {nb}</Text>
       <TextInput
       style={styles.input}
-      onChanheText={onChangeNb}
+      onChanheText={number => onChangeNb(number)}
       value={number}
       placeholder='Entrer un nombre'
       keyboardType='numeric'
