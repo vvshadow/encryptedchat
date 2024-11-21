@@ -28,8 +28,11 @@ export default function App() {
 
   const listecourses = ["Pain", "Fromage", "Fruits"];
 
+  const ajouter = () =>{
+    
+  }
 
-  const validate = () => {
+/*  const validate = () => {
     if (saisie == nombre) {
       alert("reussis")
     } else if (saisie > nombre) {
@@ -38,7 +41,7 @@ export default function App() {
     else {
       alert("faux plus grand");
     }
-  }
+  }*/
 
   return (
     /*<View style={styles.container}>
@@ -77,7 +80,7 @@ export default function App() {
         keyboardType="text"
 
       ></TextInput>
-
+      <Button onPress={ajouter} title="ajouter" color="#ff0000" accessibilityLabel="testajouter"/>
       {
         listecourses.map((element, i) => {
           return (
