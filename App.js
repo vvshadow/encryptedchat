@@ -15,27 +15,33 @@ export default function App() {
   const moins = () => {
     setNb(nb - 1)
   }
-  const [number, onChangeNb] = useState();
-  const [nombre, setNombre] = useState(0);
-  const incremente = () => {
-    setNombre(nombre + 1);
-  }
- 
-  onPress = { incremente }
 
-  let max = 100;
-  let min = 1;
-  let rand = Math.floor(Math.random() );
 
-  const [saisie, setsaisie] = useState("saisissez votre nombre");
-  if (saisie == rand){
-    alert "reussi";
-  }
+
+  //const [number, onChangeNb] = useState();
+  //const [nombre, setNombre] = useState(Math.floor(Math.random() * 40));
+  //let max = 100;
+  //let min = 1;
+
+
+  const [saisie, setsaisie] = useState("S?");
+
   const listecourses = ["Pain", "Fromage", "Fruits"];
 
 
+  const validate = () => {
+    if (saisie == nombre) {
+      alert("reussis")
+    } else if (saisie > nombre) {
+      alert("faux plus petit");
+    }
+    else {
+      alert("faux plus grand");
+    }
+  }
+
   return (
-    <View style={styles.container}>
+    /*<View style={styles.container}>
       <Text style={styles.Text}>
         App Zayd React native</Text>
       <StatusBar style="auto" />
@@ -48,34 +54,38 @@ export default function App() {
         placeholder='Saisisez votre normbre'
         value={saisie}
         onChangeText={(value) => setsaisie(value)}
-        keyboardType='numeric'
-        
+        keyboardType='text'
+
       ></TextInput>
-      <Text>nombre magique : {rand}</Text>
+      <Text>nombre magique : {nombre}</Text>
       <Button onPress={plus} title="plus" color="#ff0000"
         accessibilityLabel="testplus" />
 
       <Button onPress={moins} title="moins" color="#ff0000"
         accessibilityLabel="testplus" />
+      <Button onPress={validate} title="valider" color="#ff0000"
+        accessibilityLabel="testplus" />
+    </View>*/
+    <View style={styles.container}>
+      <Text style={styles.Text}>
+        Liste de course de Zayd</Text>
+      <StatusBar style="auto" />
+      <TextInput
+        style={styles.input}
+        value = {saisie}
+        onChangeText={(value) => setsaisie(value)}
+        keyboardType="text"
+
+      ></TextInput>
+
+      {
+        listecourses.map((element, i) => {
+          return (
+            <Text> {i + 1} - {element} </Text>
+          );
+        })
+      }
     </View>
-    /* <View style={styles.container}>
-       <Text style={styles.Text}>
-         Liste de course de Zayd</Text>
-       <StatusBar style="auto" />
-       <TextInput 
-       style={styles.input} 
-       onChanheText={}
- 
-        ></TextInput>
- 
-       {
-         listecourses.map((element, i) => {
-           return (
-             <Text> {i + 1} - {element} </Text>
-           );
-         })
-       }
-     </View>*/
   );
 }
 
