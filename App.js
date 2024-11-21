@@ -16,11 +16,23 @@ export default function App() {
     setNb(nb - 1)
   }
   const [number, onChangeNb] = useState();
-  
+  const [nombre, setNombre] = useState(0);
+  const incremente = () => {
+    setNombre(nombre + 1);
+  }
+ 
+  onPress = { incremente }
 
   let max = 100;
   let min = 1;
-  let rand = Math.floor(Math.random() * number);
+  let rand = Math.floor(Math.random() );
+
+  const [saisie, setsaisie] = useState("saisissez votre nombre");
+  if (saisie == rand){
+    alert "reussi";
+  }
+  const listecourses = ["Pain", "Fromage", "Fruits"];
+
 
   return (
     <View style={styles.container}>
@@ -32,11 +44,12 @@ export default function App() {
         accessibilityLabel="test de test de test" />
       <Text>valeur de {nb}</Text>
       <TextInput
-      style={styles.input}
-      onChanheText={number => onChangeNb(number)}
-      value={number}
-      placeholder='Entrer un nombre'
-      keyboardType='numeric'
+        style={styles.input}
+        placeholder='Saisisez votre normbre'
+        value={saisie}
+        onChangeText={(value) => setsaisie(value)}
+        keyboardType='numeric'
+        
       ></TextInput>
       <Text>nombre magique : {rand}</Text>
       <Button onPress={plus} title="plus" color="#ff0000"
@@ -45,6 +58,24 @@ export default function App() {
       <Button onPress={moins} title="moins" color="#ff0000"
         accessibilityLabel="testplus" />
     </View>
+    /* <View style={styles.container}>
+       <Text style={styles.Text}>
+         Liste de course de Zayd</Text>
+       <StatusBar style="auto" />
+       <TextInput 
+       style={styles.input} 
+       onChanheText={}
+ 
+        ></TextInput>
+ 
+       {
+         listecourses.map((element, i) => {
+           return (
+             <Text> {i + 1} - {element} </Text>
+           );
+         })
+       }
+     </View>*/
   );
 }
 
