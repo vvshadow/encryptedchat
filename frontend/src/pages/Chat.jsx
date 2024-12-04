@@ -50,7 +50,7 @@ const Chat = () => {
   return (
     <div>
       <h2>Chat</h2>
-      <input placeholder="Recipient" onChange={(e) => setTo(e.target.value)} />
+      <input placeholder="Receveur" onChange={(e) => setTo(e.target.value)} />
       <div>
         {messages.map((msg, idx) => (
           <p key={idx}>
@@ -59,8 +59,8 @@ const Chat = () => {
         ))}
       </div>
       <form onSubmit={sendMessage}>
-        <input placeholder="Type a message..." value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
-        <button type="submit">Send</button>
+        <input placeholder="Votre message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+        <button type="submit">Envoyé</button>
       </form>
     </div>
   );
