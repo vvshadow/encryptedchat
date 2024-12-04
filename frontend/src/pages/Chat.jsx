@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { IoIosSend } from "react-icons/io";
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -48,9 +49,10 @@ const Chat = () => {
   }, [to, username]); // Dépendance sur "to" et "username"
 
   return (
-    <div>
-      <h2>Chat</h2>
-      <input placeholder="Receveur" onChange={(e) => setTo(e.target.value)} />
+    <div class="container">
+      <div align="center" class="item">
+     <h1> ShieldyTalk </h1>
+      <input placeholder="Receveur" onChange={(e) => setTo(e.target.value)} /><br></br>
       <div>
         {messages.map((msg, idx) => (
           <p key={idx}>
@@ -59,9 +61,10 @@ const Chat = () => {
         ))}
       </div>
       <form onSubmit={sendMessage}>
-        <input placeholder="Votre message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
-        <button type="submit">Envoyé</button>
+        <input placeholder="Votre message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} /><br></br>
+        <button type="submit">Envoyé <IoIosSend size={15} color="#black"/></button>
       </form>
+      </div>
     </div>
   );
 };

@@ -23,29 +23,33 @@ const Register = () => {
   };
 
   return (
+    <div class="container">
+      <div align="center" class="item">
     <form onSubmit={handleSubmit}>
-      <h2>Register</h2>
+      <h2>Register</h2><br></br>
       <input
         name="username"
         placeholder="Username"
         onChange={handleChange}
         value={formData.username}
-      />
+      /><br></br>
       <input
         name="email"
         placeholder="Email"
         onChange={handleChange}
         value={formData.email}
-      />
+      /><br></br>
       <input
         name="password"
         type="password"
         placeholder="Password"
         onChange={handleChange}
         value={formData.password}
-      />
+      /><br></br>
       <button type="submit">Sign Up</button>
     </form>
+    </div>
+    </div>
   );
 };
 
