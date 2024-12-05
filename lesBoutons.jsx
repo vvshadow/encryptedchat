@@ -4,16 +4,24 @@ export const LesBoutons = (props) => {
 return (
 <View style={props.lestyle.containerligne}>
 <Button
-title="ajouter"
-color="#ff0000"
-accessibilityLabel="Learn more about this purple button"
-onPress={props.ajouter}
+    title="ajouter"
+    color="#ff0000"
+    accessibilityLabel="Learn more about this purple button"
+    onPress={props.ajouter}
 />
 
-<TouchableOpacity
-title='supprimer'
-color="#ff0000"
-accessibilityLabel='supprimer'
-onPress={props.supprimer}/>
+
 </View>
 );} 
+
+export const LeTextInput = (props) =>{ 
+    return (  
+<View style={props.lestyle.containerligne}>
+<TextInput
+        style={styles.input}
+        value={props.setsaisieaisie}
+        onChangeText={(value) => setsaisie(value)}
+        placeholder="Ajoutez prod"
+/>
+</View>
+);}

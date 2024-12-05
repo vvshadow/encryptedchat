@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from "react";
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert, TextInput, TouchableOpacity } from 'react-native';
-import { LesBoutons } from './lesBoutons';
+import { LesBoutons, LeTextInput } from './lesBoutons';
 
 export default function App() {
   const [saisie, setsaisie] = useState(""); // Saisie utilisateur pour un produit
@@ -55,6 +55,7 @@ export default function App() {
         onChangeText={(value) => setsaisie(value)}
         placeholder="Ajoutez prod"
       />
+      <LeTextInput saisie={setsaisie} lestyles={styles}></LeTextInput>
       <LesBoutons ajouter={ajouter} lestyle={styles}></LesBoutons>
     </View>
   );}
