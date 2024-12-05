@@ -16,4 +16,4 @@ color="#ff0000"
 accessibilityLabel='supprimer'
 onPress={props.supprimer}/>
 </View>
-);}
+);} 
