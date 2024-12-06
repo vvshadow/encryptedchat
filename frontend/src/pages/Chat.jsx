@@ -8,15 +8,14 @@ const Chat = () => {
   const [to, setTo] = useState('');
   const [username, setUsername] = useState('');
 
-  // Récupérer le nom d'utilisateur depuis localStorage
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
-      setUsername(storedUsername); // Mettre à jour le state avec le nom d'utilisateur
+      setUsername(storedUsername); 
     } else {
-      setUsername('JohnDoe'); // Valeur par défaut si rien n'est trouvé dans localStorage
+      setUsername('JohnDoe');
     }
-  }, []); // useEffect s'exécute une seule fois au montage du composant
+  }, []);
 
   const fetchMessages = async () => {
     if (username && to) {
@@ -35,7 +34,7 @@ const Chat = () => {
       try {
         await axios.post('http://localhost:5000/api/messages/send', { from: username, to, message: newMessage });
         setNewMessage('');
-        fetchMessages(); // Récupère les nouveaux messages après l'envoi
+        fetchMessages();
       } catch (err) {
         console.error(err.message);
       }
@@ -44,26 +43,35 @@ const Chat = () => {
 
   useEffect(() => {
     if (to && username) {
-      fetchMessages(); // Appel API pour récupérer les messages si "to" et "username" sont définis
+      fetchMessages();
     }
-  }, [to, username]); // Dépendance sur "to" et "username"
+  }, [to, username]);
 
   return (
-    <div class="container">
-      <div align="center" class="item">
-     <h1> ShieldyTalk </h1>
-      <input placeholder="Receveur" onChange={(e) => setTo(e.target.value)} /><br></br>
-      <div>
-        {messages.map((msg, idx) => (
-          <p key={idx}>
-            <b>{msg.from}:</b> {msg.message}
-          </p>
-        ))}
-      </div>
-      <form onSubmit={sendMessage}>
-        <input placeholder="Votre message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} /><br></br>
-        <button type="submit">Envoyé <IoIosSend size={15} color="#black"/></button>
-      </form>
+    <div className="container">
+      <div className="item">
+        <h1>ShieldyTalk</h1>
+        <input 
+          placeholder="Receveur" 
+          onChange={(e) => setTo(e.target.value)} 
+        />
+        <div className="input-area">
+          {messages.map((msg, idx) => (
+            <div key={idx} className={`message ${msg.from === username ? 'from' : 'to'}`}>
+              <b>{msg.from}:</b> {msg.message}
+            </div>
+          ))}
+        </div>
+        <form onSubmit={sendMessage}>
+          <input 
+            placeholder="Votre message" 
+            value={newMessage} 
+            onChange={(e) => setNewMessage(e.target.value)} 
+          />
+          <button class="send" type="submit" disabled={!newMessage.trim()}>
+            <IoIosSend size={20} />
+          </button>
+        </form>
       </div>
     </div>
   );
