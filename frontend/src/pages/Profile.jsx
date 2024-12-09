@@ -49,10 +49,12 @@ const Profile = () => {
   if (!userSchema) return <div>Chargement...</div>;
 
   return (
-    <div>
+    <div class="container">
+      <div class="item">
       <h2>Profil de {userSchema.username}</h2>
       <p>Email : {userSchema.email}</p>
       <p>Inscrit depuis : {new Date(userSchema.createdAt).toLocaleDateString()}</p>
+    </div>
     </div>
   );
 };
