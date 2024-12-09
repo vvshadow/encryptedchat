@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IoIosSend } from "react-icons/io";
+import LogoutButton from '../components/LogoutButton';
+
+
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
@@ -48,8 +51,10 @@ const Chat = () => {
   }, [to, username]);
 
   return (
+
     <div className="container">
       <div className="item">
+        
         <h1>ShieldyTalk</h1>
         <input 
           placeholder="Receveur" 
@@ -72,8 +77,10 @@ const Chat = () => {
             <IoIosSend size={20} />
           </button>
         </form>
+        <LogoutButton class="btn-logout" /> {/* Ajoute le bouton de déconnexion */}
       </div>
     </div>
+    
   );
 };
 

@@ -12,6 +12,7 @@ h1 {
   color: #4a4a4a;
   text-align: center;
   margin-top: 30px;
+  cursor: default;
 }
 
 .container {
@@ -126,4 +127,14 @@ button:disabled {
 
 button svg {
   vertical-align: middle;
+}
+
+.btn-logout{
+  background-color: rgb(115, 247, 122);
+  border-radius: 4px;
+}
+.btn-logout:hover{
+  background-color: rgb(108, 241, 20);
+  border-radius: 7px;
+
 }
