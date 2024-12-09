@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IoIosSend } from "react-icons/io";
 import LogoutButton from '../components/LogoutButton';
+import ProfileButton from '../components/ProfileButton'
 
 
 
@@ -77,7 +78,9 @@ const Chat = () => {
             <IoIosSend size={20} />
           </button>
         </form>
-        <LogoutButton class="btn-logout" /> {/* Ajoute le bouton de déconnexion */}
+        <LogoutButton class="btn-logout" /> 
+        <ProfileButton  />
+        {/* Ajoute le bouton de déconnexion */}
       </div>
     </div>
     

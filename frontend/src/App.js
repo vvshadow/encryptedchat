@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Chat from './pages/Chat'; // Page du chat après connexion
 import Login from './pages/Login'; // Page de connexion
 import Register from './pages/Register'; // Page d'inscription
+import Profile from './pages/Profile';
 const App = () => {
   return ( <AuthProvider>
     <Router>
@@ -19,6 +20,14 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Chat />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />
