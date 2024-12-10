@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const path = require('path');
 
 // Charger les variables d'environnement
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.json());
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/messages', require('./routes/messageRoutes'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Gestion des routes inexistantes (404)
 app.use((req, res, next) => {
