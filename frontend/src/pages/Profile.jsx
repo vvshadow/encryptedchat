@@ -11,7 +11,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-      //  console.log("Token récupéré:", token); // Log du token
+        //console.log("Token récupéré:", token); // Log du token
 
         if (!token) {
           setError("Token introuvable. Veuillez vous reconnecter.");
@@ -49,11 +49,24 @@ const Profile = () => {
   if (!userSchema) return <div>Chargement...</div>;
 
   return (
-    <div class="container">
-      <div class="item">
+    <div class="container2">
+      <div class="item2">
       <h2>Profil de {userSchema.username}</h2>
+      {userSchema.profileImage ? (
+      <img
+        src={userSchema.profileImage}
+        alt={`Photo de ${userSchema.username}`}
+        style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+      />
+    ) : (
+      <img
+        src="https://via.placeholder.com/150"
+        alt="Image par défaut"
+        style={{ width: '150px', height: '150px', borderRadius: '50%' }}
+      />
+    )}
       <p>Email : {userSchema.email}</p>
-      
+      <p>Inscrit depuis : {new Date(userSchema.createdAt).toLocaleDateString()}</p>
     </div>
     </div>
   );

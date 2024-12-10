@@ -16,7 +16,15 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-  }}
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now },
+
+  profileImage: {
+    type: String,
+    required: false, },
+}
 );
 
 // Modèle User

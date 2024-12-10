@@ -5,20 +5,20 @@ const User = require('../models/User');
 // Inscription d'un utilisateur
 exports.registerUser = async (req, res) => {
   const { username, email, password } = req.body;
-
+  
   try {
     // Vérifier si l'utilisateur existe déjà
     const userExists = await User.findOne({ email });
     if (userExists) return res.status(400).json({ message: 'L\'utilisateur existe déjà.' });
 
-    // Hasher le mot de passe
+    // Hash du mdp & img de profil par defaut
     const hashedPassword = await bcrypt.hash(password, 10);
-
+    const defaultProfileImage = "https://via.placeholder.com/150";
     // Créer un nouvel utilisateur
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username, email, password: hashedPassword, createdAt: new Date(), profileImage: defaultProfileImage });
     await newUser.save();
 
-    res.status(201).json({ message: 'Utilisateur enregistré avec succès.' });
+    res.status(201).json({ message: 'enregistré c kre' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -46,8 +46,7 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-// Récupération du profil utilisateur
-// Dans userController.js
+// Récup du profil
 exports.getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user.id); // Accède à l'ID de l'utilisateur à partir du token
@@ -56,6 +55,8 @@ exports.getProfile = async (req, res) => {
     res.status(200).json({
       username: user.username,
       email: user.email,
+      createdAt: user.createdAt,
+      profileImage: user.profileImage,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
