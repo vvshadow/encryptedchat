@@ -11,7 +11,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log("Token récupéré:", token); // Log du token
+      //  console.log("Token récupéré:", token); // Log du token
 
         if (!token) {
           setError("Token introuvable. Veuillez vous reconnecter.");
@@ -53,7 +53,7 @@ const Profile = () => {
       <div class="item">
       <h2>Profil de {userSchema.username}</h2>
       <p>Email : {userSchema.email}</p>
-      <p>Inscrit depuis : {new Date(userSchema.createdAt).toLocaleDateString()}</p>
+      
     </div>
     </div>
   );
