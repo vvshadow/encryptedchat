@@ -3,6 +3,7 @@ import { useState } from "react";
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert, TextInput, TouchableOpacity } from 'react-native';
 import { LesBoutons, LeTextInput } from './lesBoutons';
+import axios from 'axios';
 
 export default function App() {
   const [saisie, setsaisie] = useState(""); // Saisie utilisateur pour un produit
