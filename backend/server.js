@@ -21,6 +21,7 @@ app.use(express.json());
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/messages', require('./routes/messageRoutes'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/friends', require('./routes/friends'));
 
 // Gestion des routes inexistantes (404)
 app.use((req, res, next) => {

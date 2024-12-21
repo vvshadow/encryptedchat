@@ -1,16 +1,18 @@
+// frontend/src/pages/Chat.jsx
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IoIosSend } from "react-icons/io";
 import LogoutButton from '../components/LogoutButton';
-import ProfileButton from '../components/ProfileButton'
-
-
+import ProfileButton from '../components/ProfileButton';
+import FriendList from '../components/FriendList';
+import { useNavigate } from 'react-router-dom'; // Importer useNavigate
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [to, setTo] = useState('');
   const [username, setUsername] = useState('');
+  const navigate = useNavigate(); // Initialiser le hook useNavigate
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
@@ -51,11 +53,14 @@ const Chat = () => {
     }
   }, [to, username]);
 
-  return (
+  // Fonction pour rediriger vers la page amis
+  const goToFriendsPage = () => {
+    navigate('/friends'); // Redirige vers la page des amis
+  };
 
+  return (
     <div className="container">
       <div className="item">
-        
         <h1>ShieldyTalk</h1>
         <input 
           placeholder="Receveur" 
@@ -74,16 +79,21 @@ const Chat = () => {
             value={newMessage} 
             onChange={(e) => setNewMessage(e.target.value)} 
           />
-          <button class="send" type="submit" disabled={!newMessage.trim()}>
+          <button className="send" type="submit" disabled={!newMessage.trim()}>
             <IoIosSend size={20} />
           </button>
         </form>
-        <LogoutButton class="btn-logout" /> 
-        <ProfileButton  />
-        {/* Ajoute le bouton de déconnexion */}
+        
+        {/* Ajouter un bouton pour rediriger vers la page des amis */}
+        <button onClick={goToFriendsPage} className="btn-friends">
+          Voir mes amis
+        </button>
+
+        <LogoutButton className="btn-logout" />
+       
+        <ProfileButton />
       </div>
     </div>
-    
   );
 };
 

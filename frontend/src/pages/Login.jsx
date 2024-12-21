@@ -19,6 +19,7 @@ const Login = () => {
       const res = await axios.post('http://localhost:5000/api/users/login', formData);
 
       // Stocker le token et le nom d'utilisateur dans localStorage
+      localStorage.setItem('userId', res.data.userId); // ID de l'utilisateur
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('username', res.data.username);
 
