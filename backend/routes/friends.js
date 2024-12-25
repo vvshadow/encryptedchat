@@ -26,25 +26,22 @@ router.post('/accept', async (req, res) => {
   }
 });
 
-
 router.get('/accepted', async (req, res) => {
-  const { userId } = req.query; // Assurez-vous que `userId` est envoyé
+  const { userId } = req.query;
 
   if (!userId) {
-    return res.status(400).json({ message: "L'ID de l'utilisateur est requis." });
+    return res.status(400).json({ message: 'userId est requis.' });
   }
 
   try {
-    // Trouver les relations où le statut est "accepted"
-    const friends = await Friend.find({ userId, status: 'accepted' })
-      .populate('friendId', 'username email'); // Optionnel, pour récupérer les infos de l'ami
-
+    const friends = await Friend.find({ userId, status: 'accepted' }).populate('friendId');
     res.status(200).json(friends);
   } catch (error) {
-    console.error('Erreur lors de la récupération des amis :', error);
+    console.error('Erreur lors de la récupération des amis:', error);
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 });
+
 
 
 router.post('/add', async (req, res) => {
