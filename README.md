@@ -52,8 +52,4 @@ Ce projet est une application de gestion d'amis qui permet aux utilisateurs de s
 - **MongoDB** : Base de données active.
 - **React** : Frontend.
 
-### Installation
-1. Clonez le dépôt :
-   ```bash
-   git clone https://github.com/votre-repo/projet-amis.git
-   cd projet-amis
+
