@@ -4,43 +4,43 @@ const Friend = require('../models/Friend'); // Assurez-vous d'importer le modèl
 const User = require('../models/User'); // Assurez-vous d'importer le modèle User si nécessaire
 
 // Récupérer les amis acceptés
-router.post('/accept', async (req, res) => {
-  const { userId, friendId } = req.body;
+// router.post('/accept', async (req, res) => {
+//   const { userId, friendId } = req.body;
 
-  try {
-    // Trouvez et mettez à jour le statut de la relation
-    const friendRequest = await Friend.findOneAndUpdate(
-      { userId: friendId, friendId: userId, status: 'pending' },
-      { status: 'accepted' },
-      { new: true }
-    );
+//   try {
+//     // Trouvez et mettez à jour le statut de la relation
+//     const friendRequest = await Friend.findOneAndUpdate(
+//       { userId: friendId, friendId: userId, status: 'pending' },
+//       { status: 'accepted' },
+//       { new: true }
+//     );
 
-    if (!friendRequest) {
-      return res.status(404).json({ message: 'Demande introuvable.' });
-    }
+//     if (!friendRequest) {
+//       return res.status(404).json({ message: 'Demande introuvable.' });
+//     }
 
-    res.status(200).json({ message: 'Demande acceptée avec succès.' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Erreur lors de l’acceptation de la demande.' });
-  }
-});
+//     res.status(200).json({ message: 'Demande acceptée avec succès.' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Erreur lors de l’acceptation de la demande.' });
+//   }
+// });
 
-router.get('/accepted', async (req, res) => {
-  const { userId } = req.query;
+router.get("/accepted", async (req, res) => {
+  const userId = req.query.userId;
 
   if (!userId) {
-    return res.status(400).json({ message: 'userId est requis.' });
+    return res.status(400).json({ message: "userId est requis." });
   }
 
   try {
-    const friends = await Friend.find({ userId, status: 'accepted' }).populate('friendId');
+    const friends = await Friend.find({ userId, status: "accepted" }).populate("friendId", "username email");
     res.status(200).json(friends);
-  } catch (error) {
-    console.error('Erreur lors de la récupération des amis:', error);
-    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  } catch (err) {
+    res.status(500).json({ error: "Erreur interne du serveur." });
   }
 });
+
 
 
 

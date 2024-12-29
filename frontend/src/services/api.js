@@ -1,5 +1,7 @@
-// src/services/api.js
 import axios from 'axios';
+
+// Définir la base URL pour les requêtes API
+axios.defaults.baseURL = 'http://localhost:5000';
 
 // Envoi de la demande d'ami
 export const sendFriendRequest = (userId, friendId) => {

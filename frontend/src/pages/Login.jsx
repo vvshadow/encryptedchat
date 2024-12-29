@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Tooltip from '../components/Tooltip';
+
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -53,6 +55,7 @@ const Login = () => {
           /><br />
           <button type="submit">Login</button>
         </form>
+<Tooltip></Tooltip>
       </div>
     </div>
   );
