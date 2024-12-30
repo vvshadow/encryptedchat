@@ -1,4 +1,4 @@
-# Projet de Gestion d'Amis avec Authentification
+# ShieldyTalk
 
 Ce projet est une application de gestion d'amis qui permet aux utilisateurs de s'inscrire, se connecter, gérer leurs amis (ajouter, accepter ou rejeter des demandes), et visualiser les listes d'amis.
 
