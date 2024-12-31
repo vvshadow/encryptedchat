@@ -18,7 +18,7 @@ exports.registerUser = async (req, res) => {
     const newUser = new User({ username, email, password: hashedPassword, createdAt: new Date(), profileImage: defaultProfileImage });
     await newUser.save();
 
-    res.status(201).json({ message: 'enregistré c kre' });
+    res.status(201).json({ message: 'Enregistrement effectué avec succès' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
