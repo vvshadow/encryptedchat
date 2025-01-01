@@ -95,7 +95,7 @@ button, .maj {
 button:hover, .maj {
   transition-duration:0.4s;
   background-color: #7375fa;
-  border-radius: 10%;
+  /* border-radius: 10%; */
 
 }
 
