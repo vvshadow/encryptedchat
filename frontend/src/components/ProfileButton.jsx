@@ -9,7 +9,7 @@ const ProfileButton = () => {
   };
 
   return (
-    <button onClick={handleProfile} style={styles.button}>
+    <button onClick={handleProfile} class="btn-friends">
       Mon Profil
     </button>
   );

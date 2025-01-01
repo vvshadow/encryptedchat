@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import AnimatedLogo from "../components/AnimatedLogo";
 const Profile = () => {
   const [userSchema, setUserData] = useState(null);
   const [error, setError] = useState(null);
@@ -123,6 +123,8 @@ const Profile = () => {
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#23272a] text-white">
       <div className="bg-[#2c2f33] rounded-lg shadow-lg p-8 max-w-lg w-full">
+      <AnimatedLogo />
+
         <h2 className="text-3xl font-bold mb-4 text-center">
           Profil de {userSchema.username}
         </h2>
@@ -146,9 +148,56 @@ const Profile = () => {
           Inscrit depuis : {new Date(userSchema.createdAt).toLocaleDateString()}
         </p>
 
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+        {error && <div role="alert" className="rounded border-s-4 border-red-500 bg-red-50 p-4">
+  <strong className="block font-medium text-red-800"> 🛑 On dirait qu'il y a eu un petit bug dans la matrice.  </strong>
+
+  <p className="mt-2 text-sm text-red-700">
+   {error}
+  </p>
+</div>}
         {successMessage && (
-          <div className="text-green-500 mb-4">{successMessage}</div>
+          <div role="alert" className="rounded-xl border border-gray-100 bg-white p-4">
+          <div className="flex items-start gap-4">
+            <span className="text-green-600">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+        
+            <div className="flex-1">
+              <strong className="block font-medium text-gray-900"> Modifications enregistrées </strong>
+        
+              <p className="mt-1 text-sm text-gray-700">{successMessage}</p>
+            </div>
+        
+            <button className="text-gray-500 transition hover:text-gray-600">
+              <span className="sr-only">Dismiss popup</span>
+        
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+          // <div className="text-green-500 mb-4"></div>
         )}
 
         <h3 className="text-lg font-semibold mb-2">Modifier la photo de profil</h3>

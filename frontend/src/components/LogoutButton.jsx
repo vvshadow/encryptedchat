@@ -11,7 +11,7 @@ const LogoutButton = () => {
     navigate('/login'); // Redirige vers la page de login
   };
 
-  return <button class="btn-logout" onClick={handleLogout}>Logout</button>;
+  return <button class="btn-friends" onClick={handleLogout}>Logout</button>;
 };
 
 export default LogoutButton;

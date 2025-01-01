@@ -6,7 +6,7 @@ import LogoutButton from '../components/LogoutButton';
 import ProfileButton from '../components/ProfileButton';
 import FriendList from '../components/FriendList';
 import { useNavigate } from 'react-router-dom';
-
+import AnimatedLogo from '../components/AnimatedLogo';
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
@@ -60,7 +60,8 @@ const Chat = () => {
   return (
     <StyledChat>
       <div className="chat-container">
-        <h1 className="title">ShieldyTalk</h1>
+        {/* <h1 className="title">ShieldyTalk</h1> */}
+      <AnimatedLogo />
         <input 
           className="receiver-input"
           placeholder="Receveur" 
@@ -89,7 +90,7 @@ const Chat = () => {
           Voir mes amis
         </button>
 
-        <LogoutButton className="btn-logout" />
+        <LogoutButton className="btn-friends" />
         <ProfileButton />
       </div>
     </StyledChat>
@@ -200,12 +201,12 @@ const StyledChat = styled.div`
     padding: 10px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition-duration: 0.3s;
   }
 
   .btn-friends:hover {
     background: linear-gradient(90deg, #00C176, #00E487);
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 `;
 

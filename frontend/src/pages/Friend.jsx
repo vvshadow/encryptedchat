@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import AnimatedLogo from "../components/AnimatedLogo";
 
 const Friend = () => {
   const [friends, setFriends] = useState([]);
@@ -40,6 +41,7 @@ const Friend = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-opacity-70">
       <div className="bg-white shadow-md rounded-lg p-6 w-11/12 max-w-md">
+      <AnimatedLogo />
         <h1 className="text-2xl font-semibold text-center mb-4 text-gray-800">
           Liste des amis
         </h1>
