@@ -1,15 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import Buttonfld from '../components/Buttonfld';
 
 const Profile = () => {
   const [userSchema, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  const [image, setImage] = useState(null); // État pour l'image
-  const [newUsername, setNewUsername] = useState(""); // État pour le pseudo
-  const [newPassword, setNewPassword] = useState(""); // État pour le mot de passe
-  const [successMessage, setSuccessMessage] = useState(null); // Message de succès
+  const [image, setImage] = useState(null);
+  const [newPassword, setNewPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,7 +44,6 @@ const Profile = () => {
     fetchProfile();
   }, [navigate]);
 
-  // Gestion de la mise à jour de la photo de profil
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -90,41 +87,6 @@ const Profile = () => {
     }
   };
 
-  // Gestion de la mise à jour du pseudo
-  const handleUsernameSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!newUsername) {
-      setError("Veuillez entrer un nouveau pseudo.");
-      return;
-    }
-
-    try {
-      const token = localStorage.getItem("token");
-      const response = await axios.put(
-        "http://localhost:5000/api/users/profile/username",
-        { username: newUsername },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setUserData((prevData) => ({
-        ...prevData,
-        username: response.data.username,
-      }));
-      setSuccessMessage("Pseudo mis à jour avec succès !");
-      setNewUsername("");
-      setError(null);
-    } catch (error) {
-      console.error("Erreur lors de la mise à jour du pseudo", error);
-      setError("Erreur lors de la mise à jour du pseudo.");
-    }
-  };
-
-  // Gestion de la mise à jour du mot de passe
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
 
@@ -156,67 +118,70 @@ const Profile = () => {
     }
   };
 
-  if (!userSchema) return <div>Chargement...</div>;
+  if (!userSchema) return <div className="text-white">Chargement...</div>;
 
   return (
-    <div className="container2">
-      <div className="item2">
-        <h2>Profil de {userSchema.username}</h2>
-        {userSchema.profileImage ? (
-          <img
-            src={`http://localhost:5000${userSchema.profileImage}`}
-            alt={`Photo de ${userSchema.username}`}
-            style={{ width: "150px", height: "150px", borderRadius: "50%" }}
-          />
-        ) : (
-          <img
-            src="https://via.placeholder.com/150"
-            alt="Image par défaut"
-            style={{ width: "150px", height: "150px", borderRadius: "50%" }}
-          />
-        )}
-        <p>Email : {userSchema.email}</p>
-        <p>Inscrit depuis : {new Date(userSchema.createdAt).toLocaleDateString()}</p>
+    <div className="min-h-screen flex justify-center items-center bg-[#23272a] text-white">
+      <div className="bg-[#2c2f33] rounded-lg shadow-lg p-8 max-w-lg w-full">
+        <h2 className="text-3xl font-bold mb-4 text-center">
+          Profil de {userSchema.username}
+        </h2>
+        <div className="flex justify-center mb-4">
+          {userSchema.profileImage ? (
+            <img
+              src={`http://localhost:5000${userSchema.profileImage}`}
+              alt={`Photo de ${userSchema.username}`}
+              className="w-32 h-32 rounded-full object-cover"
+            />
+          ) : (
+            <img
+              src="https://via.placeholder.com/150"
+              alt="Image par défaut"
+              className="w-32 h-32 rounded-full"
+            />
+          )}
+        </div>
+        <p className="text-center mb-4">Email : {userSchema.email}</p>
+        <p className="text-center mb-4">
+          Inscrit depuis : {new Date(userSchema.createdAt).toLocaleDateString()}
+        </p>
 
-        {/* Affichage des erreurs */}
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="text-red-500 mb-4">{error}</div>}
         {successMessage && (
-          <div className="success-message">{successMessage}</div>
+          <div className="text-green-500 mb-4">{successMessage}</div>
         )}
 
-        {/* Formulaire pour modifier la photo de profil */}
-        <h3>Modifier la photo de profil</h3>
-        <form onSubmit={handleImageSubmit}>
+        <h3 className="text-lg font-semibold mb-2">Modifier la photo de profil</h3>
+        <form onSubmit={handleImageSubmit} className="flex flex-col gap-2 mb-4">
           <input
-            className="image-upload"
             type="file"
             accept="image/*"
             onChange={handleImageChange}
+            className="file-input file-input-bordered w-full"
           />
-          <button type="submit">Mettre à jour</button>
+          <button
+            type="submit"
+            className="bg-[#00E487] text-black py-2 rounded hover:bg-[#00f692] transition"
+          >
+            Mettre à jour
+          </button>
         </form>
-          {/* Formulaire pour modifier le pseudo
-                <h3>Modifier le pseudo</h3>
-                <form onSubmit={handleUsernameSubmit}>
-                  <input
-                    type="text"
-                    value={newUsername}
-                    onChange={(e) => setNewUsername(e.target.value)}
-                    placeholder="Nouveau pseudo"
-                  />
-                  <button type="submit">Mettre à jour</button>
-          </form>*/}
 
-        {/* Formulaire pour modifier le mot de passe */}
-        <h3>Modifier le mot de passe</h3>
-        <form onSubmit={handlePasswordSubmit}>
+        <h3 className="text-lg font-semibold mb-2">Modifier le mot de passe</h3>
+        <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-2">
           <input
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="Nouveau mot de passe"
+            className="bg-[#2c2f33] border border-gray-600 rounded p-2 text-white focus:outline-none focus:ring-2 focus:ring-[#00E487]"
           />
-          <button type="submit">Mettre à jour</button>
+          <button
+            type="submit"
+            className="bg-[#00E487] text-black py-2 rounded hover:bg-[#00f692] transition"
+          >
+            Mettre à jour
+          </button>
         </form>
       </div>
     </div>

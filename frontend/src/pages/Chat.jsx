@@ -1,23 +1,23 @@
-// frontend/src/pages/Chat.jsx
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IoIosSend } from "react-icons/io";
+import styled from 'styled-components';
 import LogoutButton from '../components/LogoutButton';
 import ProfileButton from '../components/ProfileButton';
 import FriendList from '../components/FriendList';
-import { useNavigate } from 'react-router-dom'; // Importer useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [to, setTo] = useState('');
   const [username, setUsername] = useState('');
-  const navigate = useNavigate(); // Initialiser le hook useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem('username');
     if (storedUsername) {
-      setUsername(storedUsername); 
+      setUsername(storedUsername);
     } else {
       setUsername('JohnDoe');
     }
@@ -53,16 +53,16 @@ const Chat = () => {
     }
   }, [to, username]);
 
-  // Fonction pour rediriger vers la page amis
   const goToFriendsPage = () => {
-    navigate('/friends'); // Redirige vers la page des amis
+    navigate('/friends');
   };
 
   return (
-    <div className="container">
-      <div className="item">
-        <h1>ShieldyTalk</h1>
+    <StyledChat>
+      <div className="chat-container">
+        <h1 className="title">ShieldyTalk</h1>
         <input 
+          className="receiver-input"
           placeholder="Receveur" 
           onChange={(e) => setTo(e.target.value)} 
         />
@@ -73,28 +73,140 @@ const Chat = () => {
             </div>
           ))}
         </div>
-        <form onSubmit={sendMessage}>
+        <form onSubmit={sendMessage} className="message-form">
           <input 
+            className="message-input"
             placeholder="Votre message" 
             value={newMessage} 
             onChange={(e) => setNewMessage(e.target.value)} 
           />
-          <button className="send" type="submit" disabled={!newMessage.trim()}>
+          <button className="send-button" type="submit" disabled={!newMessage.trim()}>
             <IoIosSend size={20} />
           </button>
         </form>
         
-        {/* Ajouter un bouton pour rediriger vers la page des amis */}
         <button onClick={goToFriendsPage} className="btn-friends">
           Voir mes amis
         </button>
 
         <LogoutButton className="btn-logout" />
-       
         <ProfileButton />
       </div>
-    </div>
+    </StyledChat>
   );
 };
+
+const StyledChat = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #23272a;
+
+  .chat-container {
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    color: #00E487;
+    margin-bottom: 10px;
+  }
+
+  .receiver-input, .message-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .receiver-input:focus, .message-input:focus {
+    border-color: #00E487;
+    box-shadow: 0 0 5px rgba(0, 228, 135, 0.5);
+  }
+
+  .input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+  }
+
+  .message {
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+
+  .message.from {
+    align-self: flex-end;
+    background: #00E487;
+    color: white;
+  }
+
+  .message.to {
+    align-self: flex-start;
+    background: #e0f7ec;
+    color: #333;
+  }
+
+  .message-form {
+    display: flex;
+    gap: 10px;
+  }
+
+  .send-button {
+    background: #00E487;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .send-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 228, 135, 0.3);
+  }
+
+  .send-button:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+  }
+
+  .btn-friends {
+    background: linear-gradient(90deg, #00E487, #00C176);
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .btn-friends:hover {
+    background: linear-gradient(90deg, #00C176, #00E487);
+    transform: scale(1.05);
+  }
+`;
 
 export default Chat;

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Tooltip from '../components/Tooltip';
+import AnimatedLogo from '../components/AnimatedLogo';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -33,6 +34,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen" style={{ backgroundColor: '#23272a' }}>
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
+      <AnimatedLogo />
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
