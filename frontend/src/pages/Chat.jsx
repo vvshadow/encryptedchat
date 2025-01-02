@@ -26,7 +26,7 @@ const Chat = () => {
   const fetchMessages = async () => {
     if (username && to) {
       try {
-        const res = await axios.get(`http://localhost:5000/api/messages/${username}/${to}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/messages/${username}/${to}`);
         setMessages(res.data);
       } catch (err) {
         console.error(err.message);
@@ -38,7 +38,7 @@ const Chat = () => {
     e.preventDefault();
     if (newMessage.trim() && username && to) {
       try {
-        await axios.post('http://localhost:5000/api/messages/send', { from: username, to, message: newMessage });
+        await axios.post(`${process.env.REACT_APP_API_URL}/api/messages/send`, { from: username, to, message: newMessage });
         setNewMessage('');
         fetchMessages();
       } catch (err) {

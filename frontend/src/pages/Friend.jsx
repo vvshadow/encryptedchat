@@ -15,7 +15,7 @@ const Friend = () => {
         }
 
         const res = await axios.get(
-          `http://localhost:5000/api/friends/accepted?userId=${userId}`
+          `${process.env.REACT_APP_API_URL}/api/friends/accepted?userId=${userId}`
         );
         setFriends(res.data);
       } catch (error) {

@@ -131,7 +131,7 @@ const Profile = () => {
         <div className="flex justify-center mb-4">
           {userSchema.profileImage ? (
             <img
-              src={`http://localhost:5000${userSchema.profileImage}`}
+              src={`${process.env.REACT_APP_API_URL}${userSchema.profileImage}`}
               alt={`Photo de ${userSchema.username}`}
               className="w-32 h-32 rounded-full object-cover"
             />
