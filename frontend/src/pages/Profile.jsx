@@ -21,7 +21,7 @@ const Profile = () => {
           return;
         }
 
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,7 +65,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        "http://localhost:5000/api/users/profile/picture",
+        `${process.env.REACT_APP_API_URL}/api/users/profile/picture`,
         formData,
         {
           headers: {
@@ -98,7 +98,7 @@ const Profile = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        "http://localhost:5000/api/users/profile/password",
+        `${process.env.REACT_APP_API_URL}/api/users/profile/password`,
         { password: newPassword },
         {
           headers: {
