@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Définir la base URL pour les requêtes API
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL ||'https://encryptedchat-1.onrender.com';
 
 // Envoi de la demande d'ami
 export const sendFriendRequest = (userId, friendId) => {
