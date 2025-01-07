@@ -4,7 +4,7 @@ import AnimatedLogo from "../components/AnimatedLogo";
 
 const Friend = () => {
   const [friends, setFriends] = useState([]);
-  const userId = typeof window !== "6776e6e2f42d4526db16b5f9" ? localStorage.getItem("userId") : null;
+  const userId = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
 
   useEffect(() => {
     const fetchFriends = async () => {
