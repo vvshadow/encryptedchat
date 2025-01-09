@@ -6,8 +6,8 @@ const Friend = () => {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const userId = sessionStorage.getItem('userId');
-  const token = sessionStorage.getItem('token');
+  const userId = localStorage.getItem('userId');
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchFriends = async () => {
