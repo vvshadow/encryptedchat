@@ -24,7 +24,7 @@ const Login = () => {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/login`, formData); // Utilise la variable d'environnement pour l'URL
 
       // Sauvegarde des informations utilisateur
-      localStorage.setItem('userId', res.data.userId);
+      sessionStorage.setItem('userId', res.data.userId);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('username', res.data.username);
 
