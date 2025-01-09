@@ -1,6 +1,6 @@
 {
-  "short_name": "EncryptedChat",
-  "name": "Create EncryptedChat sample",
+  "short_name": "EncryptedChat Zayd",
+  "name": "EncryptedChat",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +8,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "shield192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
