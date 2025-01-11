@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import AnimatedLogo from "../components/AnimatedLogo";
 
 const Friend = () => {
-  const [friends, setFriends] = useState([]);
   const userId = localStorage.getItem('userId');
+  const [friends, setFriends] = useState([]);
+  
 
   useEffect(() => {
     const fetchFriends = async () => {
