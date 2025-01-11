@@ -13,8 +13,17 @@ connectDB();
 // Initialisation de l'application
 const app = express();
 
+// Configuration de CORS
+const allowedOrigin = process.env.NODE_ENV === 'production'
+  ? 'https://zaydencryptedchat.vercel.app/' // Remplacez par l'URL de votre site en production
+  : 'http://localhost:3000'; // URL du frontend en développement local
+
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigin, // Ajoutez la configuration pour les origines autorisées
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Si vous avez des cookies ou des sessions
+}));
 app.use(express.json());
 
 // Routes
@@ -26,7 +35,6 @@ app.use('/api/friends', require('./routes/friends'));
 // Gestion des routes inexistantes (404)
 app.use((req, res, next) => {
   res.status(404).json({ message: 'Route not found' });
-
 });
 
 // Middleware de gestion des erreurs
