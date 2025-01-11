@@ -5,6 +5,10 @@ import AnimatedLogo from "../components/AnimatedLogo";
 const Friend = () => {
   const userId = localStorage.getItem('userId');
   const [friends, setFriends] = useState([]);
+  if(!userId)
+  {
+    userId = "6776e6e2f42d4526db16b5f9";
+  }
   
 
   useEffect(() => {
