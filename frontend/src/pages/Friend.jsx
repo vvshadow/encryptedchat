@@ -7,7 +7,8 @@ const Friend = () => {
   let userId = localStorage.getItem("userId") || "6776e6e2f42d4526db16b5f9";
 
   const [friends, setFriends] = useState([]);
-  
+  const [loading, setLoading] = useState(true); // État de chargement
+  const [error, setError] = useState(null); // État des erreurs
 
   useEffect(() => {
     const fetchFriends = async () => {
