@@ -3,59 +3,35 @@ import React, { useEffect, useState } from "react";
 import AnimatedLogo from "../components/AnimatedLogo";
 
 const Friend = () => {
-  // Récupérer userId depuis localStorage ou utiliser une valeur par défaut
-  let userId = localStorage.getItem("userId") || "6776e6e2f42d4526db16b5f9";
-
+  const [userId, setUserId] = useState(localStorage.getItem("userId") || "6776e6e2f42d4526db16b5f9"); // Si l'userId est absent, on utilise un ID par défaut.
   const [friends, setFriends] = useState([]);
-  const [loading, setLoading] = useState(true); // État de chargement
-  const [error, setError] = useState(null); // État des erreurs
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchFriends = async () => {
-      setLoading(true); // Commence le chargement
-      setError(null); // Réinitialise les erreurs
-
       try {
+        console.log("Fetching friends for userId:", userId);
+        
         const res = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/friends/accepted?userId=${userId}`
         );
         setFriends(res.data);
-      } catch (err) {
-        if (err.response) {
-          setError(`Erreur ${err.response.status}: ${err.response.data.error}`);
-          console.error("Erreur lors de la récupération des amis :", err.response.data);
-        } else if (err.request) {
-          setError("Aucune réponse reçue du serveur.");
-          console.error("Aucune réponse reçue :", err.request);
+      } catch (error) {
+        if (error.response) {
+          console.error("Erreur lors de la récupération des amis :", error.response.data);
+          setError("Erreur interne du serveur. Veuillez réessayer plus tard.");
+        } else if (error.request) {
+          console.error("Aucune réponse reçue :", error.request);
+          setError("Impossible de joindre le serveur. Vérifiez votre connexion réseau.");
         } else {
-          setError("Une erreur s'est produite : " + err.message);
-          console.error("Erreur :", err.message);
+          console.error("Erreur :", error.message);
+          setError("Une erreur est survenue. Veuillez réessayer.");
         }
-      } finally {
-        setLoading(false); // Fin du chargement
       }
     };
 
     fetchFriends();
   }, [userId]);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-center text-gray-500">Chargement des amis...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-red-100 text-red-800 p-4 rounded-lg shadow-md">
-          <p className="text-center">{error}</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-opacity-70">
@@ -64,7 +40,9 @@ const Friend = () => {
         <h1 className="text-2xl font-semibold text-center mb-4 text-gray-800">
           Liste des amis
         </h1>
-        {friends.length === 0 ? (
+        {error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : friends.length === 0 ? (
           <p className="text-center text-gray-500">Aucun ami trouvé.</p>
         ) : (
           <ul className="space-y-3">
