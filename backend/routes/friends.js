@@ -26,18 +26,26 @@ const User = require('../models/User'); // Assurez-vous d'importer le modèle Us
 //   }
 // });
 
-router.get("/accepted", async (req, res) => {
+router.get('/api/friends/accepted', async (req, res) => {
   const userId = req.query.userId;
 
   if (!userId) {
-    return res.status(400).json({ message: "userId est requis." });
+    return res.status(400).json({ error: 'UserId manquant' });
   }
 
   try {
-    const friends = await Friend.find({ userId, status: "accepted" }).populate("friendId", "username email");
+    // Vérifie si l'utilisateur existe
+    const userExists = await User.findById(userId);
+    if (!userExists) {
+      return res.status(404).json({ error: 'Utilisateur non trouvé' });
+    }
+
+    // Recherche les amis acceptés
+    const friends = await Friend.find({ userId, status: 'accepted' }).populate('friendId', 'username email');
     res.status(200).json(friends);
-  } catch (err) {
-    res.status(500).json({ error: "Erreur interne du serveur." });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des amis :', error);
+    res.status(500).json({ error: 'Erreur interne du serveur.' });
   }
 });
 
