@@ -3,15 +3,31 @@ import React, { useEffect, useState } from "react";
 import AnimatedLogo from "../components/AnimatedLogo";
 
 const Friend = () => {
-  const [userId, setUserId] = useState(localStorage.getItem("userId") || "6776e6e2f42d4526db16b5f9"); // Si l'userId est absent, on utilise un ID par défaut.
+  const [userId, setUserId] = useState(null); // Initialisation de l'état
   const [friends, setFriends] = useState([]);
   const [error, setError] = useState(null);
 
+  // Récupération de l'userId dès le chargement du composant
+  useEffect(() => {
+    const storedUserId = localStorage.getItem("userId");
+    if (storedUserId) {
+      setUserId(storedUserId);
+    } else {
+      console.warn("Aucun userId dans localStorage, utilisation d'une valeur par défaut.");
+      setUserId("6776e6e2f42d4526db16b5f9"); // Valeur par défaut
+    }
+  }, []);
+
   useEffect(() => {
     const fetchFriends = async () => {
+      if (!userId) {
+        console.error("userId non défini, impossible de récupérer les amis.");
+        return;
+      }
+
       try {
         console.log("Fetching friends for userId:", userId);
-        
+
         const res = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/friends/accepted?userId=${userId}`
         );
