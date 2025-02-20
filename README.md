@@ -1,9 +1,9 @@
-# ShieldyTalk
-
+# ShieldyTalk 
+ 
 Ce projet est une application de gestion d'amis qui permet aux utilisateurs de s'inscrire, se connecter, gérer leurs amis (ajouter, accepter ou rejeter des demandes), et visualiser les listes d'amis.
-
+ 
 ## Fonctionnalités Implémentées
-
+ 
 ### Authentification
 1. **Inscription** : Les utilisateurs peuvent s'inscrire avec leur email, mot de passe et nom d'utilisateur.
 2. **Connexion** : Un utilisateur peut se connecter pour accéder à ses fonctionnalités. Un token JWT est utilisé pour gérer la session.
@@ -36,7 +36,7 @@ Ce projet est une application de gestion d'amis qui permet aux utilisateurs de s
      - `GET /api/friends/:userId/pending` : Liste des demandes en attente.
 
 ### Fichiers Clés
-- **Frontend** :
+- **Frontend**:
   - `Login.jsx` : Gestion de la connexion utilisateur.
   - `Friend.jsx` : Récupération et affichage des amis.
   - `api.js` : Contient les appels API centralisés.
@@ -46,10 +46,10 @@ Ce projet est une application de gestion d'amis qui permet aux utilisateurs de s
   - `routes/friends.js` : Gestion des relations d'amitié.
 
 ## Instructions pour Lancer le Projet
-
+ 
 ### Prérequis
-- **Node.js** : Version 16 ou supérieure.
-- **MongoDB** : Base de données active.
-- **React** : Frontend.
-
+- **Node.js** : Version 16 ou supérieure; 
+- **MongoDB** : Base de données active; 
+- **React** : Frontend. 
+ 
 
